@@ -1,3 +1,7 @@
+"""
+Models for authentication app.
+"""
 from django.db import models
 
-# Create your models here.
+# Custom User model will be added later
+# For now, using Django's default User model
