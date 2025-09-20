@@ -17,12 +17,28 @@ def api_root(request):
     return Response({
         'message': 'Welcome to Movie Recommendation API',
         'version': '1.0.0',
+        'description': 'A comprehensive REST API for movie recommendations with JWT authentication, advanced filtering, and multiple recommendation algorithms.',
+        'features': [
+            'JWT Authentication & Authorization',
+            'Movie Catalog with Search & Filtering',
+            'User Ratings & Favorites',
+            'Watch History Tracking',
+            'Advanced Recommendation Algorithms',
+            'Redis Caching for Performance',
+            'Comprehensive API Documentation'
+        ],
         'endpoints': {
             'authentication': request.build_absolute_uri('/api/auth/'),
             'movies': request.build_absolute_uri('/api/movies/'),
             'recommendations': request.build_absolute_uri('/api/recommendations/'),
             'ratings': request.build_absolute_uri('/api/ratings/'),
             'admin': request.build_absolute_uri('/admin/'),
+        },
+        'documentation': {
+            'swagger_ui': request.build_absolute_uri('/swagger/'),
+            'redoc': request.build_absolute_uri('/redoc/'),
+            'openapi_schema': request.build_absolute_uri('/swagger.json'),
+            'testing_guide': 'See TESTING_GUIDE.md for comprehensive testing instructions'
         },
         'status_endpoints': {
             'auth_status': request.build_absolute_uri('/api/auth/status/'),

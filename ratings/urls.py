@@ -7,10 +7,22 @@ from . import views
 app_name = 'ratings'
 
 urlpatterns = [
+    # Status endpoint
     path('status/', views.ratings_status, name='ratings-status'),
-    # Rating endpoints will be added here
-    # path('', views.RatingListView.as_view(), name='rating-list'),
-    # path('create/', views.RatingCreateView.as_view(), name='rating-create'),
-    # path('favorites/', views.FavoritesView.as_view(), name='favorites'),
-    # path('watch-history/', views.WatchHistoryView.as_view(), name='watch-history'),
+    
+    # User rating endpoints
+    path('my-ratings/', views.UserRatingsView.as_view(), name='user-ratings'),
+    path('my-favorites/', views.UserFavoritesView.as_view(), name='user-favorites'),
+    path('my-watchlist/', views.UserWatchHistoryView.as_view(), name='user-watchlist'),
+    path('my-stats/', views.UserStatsView.as_view(), name='user-stats'),
+    
+    # Movie-specific rating endpoints
+    path('movies/<int:movie_id>/rate/', views.RateMovieView.as_view(), name='rate-movie'),
+    path('movies/<int:movie_id>/favorite/', views.ToggleFavoriteView.as_view(), name='toggle-favorite'),
+    path('movies/<int:movie_id>/watch/', views.AddToWatchHistoryView.as_view(), name='add-to-watchlist'),
+    path('movies/<int:movie_id>/unwatch/', views.RemoveFromWatchHistoryView.as_view(), name='remove-from-watchlist'),
+    
+    # Movie rating lists and stats
+    path('movies/<int:movie_id>/ratings/', views.MovieRatingsView.as_view(), name='movie-ratings'),
+    path('movies/<int:movie_id>/stats/', views.MovieRatingStatsView.as_view(), name='movie-rating-stats'),
 ]

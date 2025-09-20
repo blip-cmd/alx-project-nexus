@@ -7,9 +7,15 @@ from . import views
 app_name = 'recommendations'
 
 urlpatterns = [
+    # Status endpoint
     path('status/', views.recommendations_status, name='recommendations-status'),
-    # Recommendation endpoints will be added here
-    # path('', views.RecommendationsView.as_view(), name='recommendations'),
-    # path('trending/', views.TrendingMoviesView.as_view(), name='trending'),
-    # path('popular/', views.PopularMoviesView.as_view(), name='popular'),
+    
+    # User recommendations
+    path('for-me/', views.UserRecommendationsView.as_view(), name='user-recommendations'),
+    
+    # Trending and discovery
+    path('trending/', views.TrendingMoviesView.as_view(), name='trending-movies'),
+    
+    # Similar movies
+    path('movies/<int:movie_id>/similar/', views.SimilarMoviesView.as_view(), name='similar-movies'),
 ]
