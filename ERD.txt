@@ -1,0 +1,73 @@
+@startuml
+entity User {
+  *id : UUID
+  --
+  name : string
+  email : string
+  password_hash : string
+  created_at : datetime
+  last_login : datetime
+}
+
+entity Movie {
+  *id : UUID
+  --
+  title : string
+  description : text
+  release_date : date
+  created_at : datetime
+}
+
+entity Genre {
+  *id : UUID
+  --
+  name : string
+}
+
+entity MovieGenre {
+  *movie_id : UUID
+  *genre_id : UUID
+}
+
+entity Rating {
+  *user_id : UUID
+  *movie_id : UUID
+  --
+  score : decimal
+  rated_at : datetime
+}
+
+entity WatchHistory {
+  *user_id : UUID
+  *movie_id : UUID
+  *watched_at : datetime
+}
+
+entity Favorite {
+  *user_id : UUID
+  *movie_id : UUID
+  *favorited_at : datetime
+}
+
+entity Tag {
+  *id : UUID
+  --
+  name : string
+}
+
+entity MovieTag {
+  *movie_id : UUID
+  *tag_id : UUID
+}
+
+User ||--o{ Rating : rates
+User ||--o{ WatchHistory : watches
+User ||--o{ Favorite : favorites
+Movie ||--o{ Rating : receives
+Movie ||--o{ WatchHistory : appears_in
+Movie ||--o{ Favorite : is_favorited
+Movie ||--o{ MovieGenre : categorized_as
+Genre ||--o{ MovieGenre : groups
+Movie ||--o{ MovieTag : tagged_with
+Tag ||--o{ MovieTag : used_in
+@enduml

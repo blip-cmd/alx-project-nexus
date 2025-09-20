@@ -1,0 +1,39 @@
+# Core Django Dependencies
+Django>=4.2,<5.0
+djangorestframework>=3.14.0
+django-cors-headers>=4.0.0
+
+# Database
+psycopg2-binary>=2.9.0
+
+# Caching
+redis>=4.5.0
+django-redis>=5.2.0
+
+# Authentication & Security
+djangorestframework-simplejwt>=5.2.0
+python-decouple>=3.8
+cryptography>=41.0.0
+
+# API Documentation
+drf-spectacular>=0.26.0
+
+# Image Handling
+Pillow>=9.5.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# Development Dependencies (optional)
+black>=23.0.0
+flake8>=6.0.0
+pytest>=7.4.0
+pytest-django>=4.5.0
+factory-boy>=3.2.0
+
+# Production Dependencies
+gunicorn>=21.2.0
+whitenoise>=6.5.0
