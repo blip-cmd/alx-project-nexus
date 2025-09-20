@@ -7,6 +7,7 @@ from . import views
 app_name = 'ratings'
 
 urlpatterns = [
+    path('status/', views.ratings_status, name='ratings-status'),
     # Rating endpoints will be added here
     # path('', views.RatingListView.as_view(), name='rating-list'),
     # path('create/', views.RatingCreateView.as_view(), name='rating-create'),
