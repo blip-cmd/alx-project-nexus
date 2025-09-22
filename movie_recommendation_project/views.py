@@ -35,10 +35,9 @@ def api_root(request):
             'admin': request.build_absolute_uri('/admin/'),
         },
         'documentation': {
-            'swagger_ui': request.build_absolute_uri('/swagger/'),
-            'redoc': request.build_absolute_uri('/redoc/'),
-            'openapi_schema': request.build_absolute_uri('/swagger.json'),
-            'testing_guide': 'See TESTING_GUIDE.md for comprehensive testing instructions'
+            'browsable_api': 'Django REST Framework provides browsable API at each endpoint',
+            'testing_guide': 'See TESTING_GUIDE.md for comprehensive testing instructions',
+            'note': 'Swagger documentation temporarily disabled - use browsable API instead'
         },
         'status_endpoints': {
             'auth_status': request.build_absolute_uri('/api/auth/status/'),

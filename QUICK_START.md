@@ -2,7 +2,7 @@
 
 ## 🚀 What We've Built
 
-You now have a **comprehensive movie recommendation system** with:
+We have a **comprehensive movie recommendation system** with:
 
 ### ✅ **Core Features Completed (Phases 1-8)**
 - **JWT Authentication System** - Secure user registration, login, profile management

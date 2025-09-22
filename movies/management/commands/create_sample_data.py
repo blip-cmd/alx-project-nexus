@@ -302,12 +302,16 @@ class Command(BaseCommand):
             
             # Don't create duplicate ratings
             if not Rating.objects.filter(user=user, movie=movie).exists():
+                # Create review text (60% chance of having a review)
+                review_text = ""
+                if random.random() < 0.6:
+                    review_text = f'Sample review by {user.username} for {movie.title}. {"Great movie!" if random.choice([True, False]) else "Not bad."}'
+                
                 rating = Rating.objects.create(
                     user=user,
                     movie=movie,
-                    rating=random.randint(1, 5),
-                    review=f'Sample review by {user.username} for {movie.title}' if random.choice([True, False]) else None,
-                    created_at=timezone.now() - timedelta(days=random.randint(1, 365))
+                    score=random.randint(1, 5),
+                    review=review_text
                 )
                 ratings_created += 1
 
@@ -322,8 +326,7 @@ class Command(BaseCommand):
             if not Favorite.objects.filter(user=user, movie=movie).exists():
                 Favorite.objects.create(
                     user=user,
-                    movie=movie,
-                    created_at=timezone.now() - timedelta(days=random.randint(1, 365))
+                    movie=movie
                 )
                 favorites_created += 1
 
@@ -339,8 +342,8 @@ class Command(BaseCommand):
                 WatchHistory.objects.create(
                     user=user,
                     movie=movie,
-                    progress_minutes=random.randint(10, movie.duration),
-                    watched_at=timezone.now() - timedelta(days=random.randint(1, 365))
+                    watch_duration=random.randint(10, movie.duration) if movie.duration else random.randint(10, 120),
+                    completed=random.choice([True, False])
                 )
                 watch_history_created += 1
 
