@@ -18,6 +18,12 @@ services:
           property: connectionString
       - key: ALLOWED_HOSTS
         value: "*"
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@movierecommendations.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
 
 databases:
   - name: movie-recommendation-db

@@ -5,6 +5,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from . import views
+from .admin_api import create_admin_user, admin_status
 
 app_name = 'authentication'
 
@@ -25,4 +26,8 @@ urlpatterns = [
     # Password reset endpoints
     path('password/reset/', views.PasswordResetRequestView.as_view(), name='password_reset_request'),
     path('password-reset/<str:uidb64>/<str:token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    
+    # Admin management (for deployment without shell access)
+    path('admin/status/', admin_status, name='admin-status'),
+    path('admin/create/', create_admin_user, name='admin-create'),
 ]
