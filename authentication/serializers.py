@@ -23,8 +23,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         help_text="Confirm your password."
     )
     email = serializers.EmailField(required=True)
-    first_name = serializers.CharField(required=True, max_length=30)
-    last_name = serializers.CharField(required=True, max_length=30)
+    first_name = serializers.CharField(required=False, max_length=30, allow_blank=True)
+    last_name = serializers.CharField(required=False, max_length=30, allow_blank=True)
 
     class Meta:
         model = User

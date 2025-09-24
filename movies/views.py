@@ -81,9 +81,15 @@ class MovieListView(ListAPIView):
         """
         Get movies queryset with optimized queries.
         """
-        queryset = Movie.objects.select_related().prefetch_related(
-            'genres', 'tags', 'ratings', 'favorited_by'
-        ).all()
+        # Use caching for the base queryset
+        cache_key = 'movies_base_queryset'
+        queryset = cache.get(cache_key)
+        
+        if queryset is None:
+            queryset = Movie.objects.select_related().prefetch_related(
+                'genres', 'tags'
+            ).all()
+            cache.set(cache_key, queryset, 300)  # Cache for 5 minutes
         
         # Filter by genre names
         genre_names = self.request.query_params.getlist('genre_name')
@@ -95,12 +101,12 @@ class MovieListView(ListAPIView):
         if tag_names:
             queryset = queryset.filter(tags__name__in=tag_names)
             
-        # Filter by rating range
+        # Filter by rating range (only if needed)
         min_rating = self.request.query_params.get('min_user_rating')
         max_rating = self.request.query_params.get('max_user_rating')
         if min_rating or max_rating:
             # Annotate with average rating
-            queryset = queryset.annotate(avg_rating=Avg('ratings__rating'))
+            queryset = queryset.annotate(avg_rating=Avg('ratings__score'))
             if min_rating:
                 queryset = queryset.filter(avg_rating__gte=float(min_rating))
             if max_rating:

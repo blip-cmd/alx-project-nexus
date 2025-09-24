@@ -7,6 +7,9 @@ from . import views
 app_name = 'recommendations'
 
 urlpatterns = [
+    # Root endpoint
+    path('', views.recommendations_status, name='recommendations-root'),
+    
     # Status endpoint
     path('status/', views.recommendations_status, name='recommendations-status'),
     

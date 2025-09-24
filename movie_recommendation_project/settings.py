@@ -110,8 +110,12 @@ DATABASES = {
 
 # Use DATABASE_URL if available (for production deployment)
 if os.getenv('DATABASE_URL'):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+    try:
+        import dj_database_url
+        DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+    except ImportError:
+        # dj_database_url not available, keep default database
+        pass
 
 # Cache Configuration
 # Use Redis if available, otherwise use dummy cache for development
@@ -198,7 +202,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Custom User Model (commented out temporarily)
+# Custom User Model (commented out for now - would require fresh database)
 # AUTH_USER_MODEL = 'authentication.User'
 
 # Django REST Framework Configuration
