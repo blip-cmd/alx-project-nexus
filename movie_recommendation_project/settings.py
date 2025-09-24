@@ -246,3 +246,24 @@ X_FRAME_OPTIONS = 'DENY'
 
 # Rate Limiting (to be implemented with django-ratelimit)
 RATELIMIT_USE_CACHE = 'default'
+
+# Swagger/OpenAPI Configuration
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+    'LOGIN_URL': '/admin/login/',
+    'LOGOUT_URL': '/admin/logout/',
+    'PERSIST_AUTH': True,
+    'REFETCH_SCHEMA_WITH_AUTH': True,
+    'REFETCH_SCHEMA_ON_LOGOUT': True,
+}
+
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': False,
+}

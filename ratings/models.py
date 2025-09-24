@@ -2,6 +2,7 @@
 Models for ratings app.
 """
 import uuid
+from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -16,7 +17,7 @@ class Rating(models.Model):
     score = models.DecimalField(
         max_digits=2, 
         decimal_places=1,
-        validators=[MinValueValidator(0.5), MaxValueValidator(5.0)],
+        validators=[MinValueValidator(Decimal('0.5')), MaxValueValidator(Decimal('5.0'))],
         help_text="Rating score (0.5-5.0 stars)"
     )
     review = models.TextField(blank=True, help_text="Optional review text")

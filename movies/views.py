@@ -82,7 +82,7 @@ class MovieListView(ListAPIView):
         Get movies queryset with optimized queries.
         """
         queryset = Movie.objects.select_related().prefetch_related(
-            'genres', 'tags', 'ratings', 'favorites'
+            'genres', 'tags', 'ratings', 'favorited_by'
         ).all()
         
         # Filter by genre names
@@ -114,7 +114,7 @@ class MovieDetailView(RetrieveAPIView):
     API endpoint for retrieving a specific movie's details.
     """
     queryset = Movie.objects.select_related().prefetch_related(
-        'genres', 'tags', 'ratings', 'favorites', 'watch_history'
+        'genres', 'tags', 'ratings', 'favorited_by', 'watched_by'
     ).all()
     serializer_class = MovieDetailSerializer
 
@@ -184,7 +184,7 @@ class PopularMoviesView(ListAPIView):
         except Exception:
             # Fallback to direct query if caching fails
             return Movie.objects.select_related().prefetch_related(
-                'genres', 'tags', 'ratings', 'favorites'
+                'genres', 'tags', 'ratings', 'favorited_by'
             ).order_by('-popularity_score')[:limit]
 
 
@@ -222,10 +222,10 @@ class TrendingMoviesView(ListAPIView):
                 recent_date = timezone.now() - timedelta(weeks=1)
             
             return Movie.objects.select_related().prefetch_related(
-                'genres', 'tags', 'ratings', 'favorites'
+                'genres', 'tags', 'ratings', 'favorited_by'
             ).annotate(
-                recent_ratings=Count('ratings', filter=Q(ratings__created_at__gte=recent_date)),
-                recent_favorites=Count('favorites', filter=Q(favorites__created_at__gte=recent_date))
+                recent_ratings=Count('ratings', filter=Q(ratings__rated_at__gte=recent_date)),
+                recent_favorites=Count('favorited_by', filter=Q(favorited_by__favorited_at__gte=recent_date))
             ).filter(
             Q(recent_ratings__gt=0) | Q(recent_favorites__gt=0)
         ).order_by('-recent_ratings', '-recent_favorites')[:30]
@@ -243,9 +243,9 @@ class TopRatedMoviesView(ListAPIView):
         Get top-rated movies by user ratings.
         """
         return Movie.objects.select_related().prefetch_related(
-            'genres', 'tags', 'ratings', 'favorites'
+            'genres', 'tags', 'ratings', 'favorited_by'
         ).annotate(
-            avg_rating=Avg('ratings__rating'),
+            avg_rating=Avg('ratings__score'),
             rating_count=Count('ratings')
         ).filter(
             rating_count__gte=5  # At least 5 ratings
@@ -312,7 +312,7 @@ class GenreMoviesView(ListAPIView):
         """
         genre_id = self.kwargs['genre_id']
         return Movie.objects.select_related().prefetch_related(
-            'genres', 'tags', 'ratings', 'favorites'
+            'genres', 'tags', 'ratings', 'favorited_by'
         ).filter(genres__id=genre_id).order_by('-popularity_score')
 
 
@@ -376,5 +376,5 @@ class TagMoviesView(ListAPIView):
         """
         tag_id = self.kwargs['tag_id']
         return Movie.objects.select_related().prefetch_related(
-            'genres', 'tags', 'ratings', 'favorites'
+            'genres', 'tags', 'ratings', 'favorited_by'
         ).filter(tags__id=tag_id).order_by('-popularity_score')

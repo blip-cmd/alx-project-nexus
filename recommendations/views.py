@@ -62,7 +62,7 @@ class RecommendationEngine:
         movies = Movie.objects.annotate(
             avg_rating=Avg('ratings__rating'),
             rating_count=Count('ratings'),
-            favorite_count=Count('favorites')
+            favorite_count=Count('favorited_by')
         ).filter(
             rating_count__gte=1,
             imdb_rating__gte=min_rating
@@ -414,7 +414,7 @@ class TrendingMoviesView(APIView):
             # Get trending movies
             trending_movies = Movie.objects.annotate(
                 recent_ratings=Count('ratings', filter=Q(ratings__created_at__gte=threshold)),
-                recent_favorites=Count('favorites', filter=Q(favorites__created_at__gte=threshold)),
+                recent_favorites=Count('favorited_by', filter=Q(favorited_by__favorited_at__gte=threshold)),
                 recent_watches=Count('watch_history', filter=Q(watch_history__watched_at__gte=threshold)),
                 trend_score=F('recent_ratings') + F('recent_favorites') * 2 + F('recent_watches')
             ).filter(

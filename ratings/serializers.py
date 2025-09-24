@@ -17,15 +17,15 @@ class RatingSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Rating
-        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'rating', 'review', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'user', 'created_at', 'updated_at']
+        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'score', 'review', 'rated_at', 'updated_at']
+        read_only_fields = ['id', 'user', 'rated_at', 'updated_at']
         
-    def validate_rating(self, value):
+    def validate_score(self, value):
         """
-        Validate rating is between 1 and 5.
+        Validate score is between 0.5 and 5.0.
         """
-        if not (1 <= value <= 5):
-            raise serializers.ValidationError("Rating must be between 1 and 5.")
+        if not (0.5 <= value <= 5.0):
+            raise serializers.ValidationError("Score must be between 0.5 and 5.0.")
         return value
         
     def validate_movie(self, value):
@@ -48,7 +48,7 @@ class RatingSerializer(serializers.ModelSerializer):
             user=user,
             movie=movie,
             defaults={
-                'rating': validated_data['rating'],
+                'score': validated_data['score'],
                 'review': validated_data.get('review', '')
             }
         )
@@ -62,14 +62,14 @@ class RatingCreateUpdateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Rating
-        fields = ['movie', 'rating', 'review']
+        fields = ['movie', 'score', 'review']
         
-    def validate_rating(self, value):
+    def validate_score(self, value):
         """
-        Validate rating is between 1 and 5.
+        Validate score is between 0.5 and 5.0.
         """
-        if not (1 <= value <= 5):
-            raise serializers.ValidationError("Rating must be between 1 and 5.")
+        if not (0.5 <= value <= 5.0):
+            raise serializers.ValidationError("Score must be between 0.5 and 5.0.")
         return value
 
 
@@ -84,8 +84,8 @@ class FavoriteSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Favorite
-        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'movie_release_date', 'created_at']
-        read_only_fields = ['id', 'user', 'created_at']
+        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'movie_release_date', 'favorited_at']
+        read_only_fields = ['id', 'user', 'favorited_at']
 
 
 class WatchHistorySerializer(serializers.ModelSerializer):
@@ -99,15 +99,15 @@ class WatchHistorySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = WatchHistory
-        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'movie_duration', 'watched_at', 'progress_minutes']
+        fields = ['id', 'user', 'movie', 'movie_title', 'movie_poster', 'movie_duration', 'watched_at', 'watch_duration', 'completed']
         read_only_fields = ['id', 'user', 'watched_at']
         
-    def validate_progress_minutes(self, value):
+    def validate_watch_duration(self, value):
         """
-        Validate progress is not negative.
+        Validate watch duration is not negative.
         """
-        if value < 0:
-            raise serializers.ValidationError("Progress cannot be negative.")
+        if value and value < 0:
+            raise serializers.ValidationError("Watch duration cannot be negative.")
         return value
 
 

@@ -64,7 +64,7 @@ class MovieListSerializer(serializers.ModelSerializer):
         """
         ratings = obj.ratings.all()
         if ratings:
-            return round(sum(r.rating for r in ratings) / len(ratings), 1)
+            return round(sum(r.score for r in ratings) / len(ratings), 1)
         return 0.0
         
     def get_rating_count(self, obj):

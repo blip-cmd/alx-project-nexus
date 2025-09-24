@@ -27,6 +27,13 @@ python setup.py
 
 ### Option 2: Manual Setup
 ```bash
+# Create and activate virtual environment
+python -m venv venv
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+# macOS/Linux
+source venv/bin/activate
+
 # 1. Install dependencies
 pip install -r requirements.txt
 
