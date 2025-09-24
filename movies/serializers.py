@@ -111,7 +111,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         """
         ratings = obj.ratings.all()
         if ratings:
-            return round(sum(r.rating for r in ratings) / len(ratings), 1)
+            return round(sum(r.score for r in ratings) / len(ratings), 1)
         return 0.0
         
     def get_rating_count(self, obj):
@@ -127,7 +127,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
             rating = obj.ratings.filter(user=request.user).first()
-            return rating.rating if rating else None
+            return rating.score if rating else None
         return None
         
     def get_is_favorited(self, obj):
@@ -136,7 +136,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         """
         request = self.context.get('request')
         if request and request.user.is_authenticated:
-            return obj.favorites.filter(user=request.user).exists()
+            return obj.favorited_by.filter(user=request.user).exists()
         return False
         
     def get_in_watchlist(self, obj):
@@ -145,7 +145,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         """
         request = self.context.get('request')
         if request and request.user.is_authenticated:
-            return obj.watch_history.filter(user=request.user).exists()
+            return obj.watched_by.filter(user=request.user).exists()
         return False
 
 

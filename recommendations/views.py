@@ -96,7 +96,7 @@ class RecommendationEngine:
         
         for rating in user_ratings:
             for genre in rating.movie.genres.all():
-                genre_scores[genre.id] += rating.rating
+                genre_scores[genre.id] += rating.score
                 
         for favorite in user_favorites:
             for genre in favorite.movie.genres.all():
@@ -148,7 +148,7 @@ class RecommendationEngine:
         if user_ratings.count() < 3:
             return RecommendationEngine.genre_based(user, limit=limit, min_rating=min_rating)
         
-        user_movie_ratings = {r.movie_id: r.rating for r in user_ratings}
+        user_movie_ratings = {r.movie_id: r.score for r in user_ratings}
         
         # Find similar users based on common movie ratings
         similar_users = []
@@ -157,7 +157,7 @@ class RecommendationEngine:
             if other_user.id in [u[0] for u in similar_users]:
                 continue
                 
-            other_ratings = {r.movie_id: r.rating for r in Rating.objects.filter(user=other_user)}
+            other_ratings = {r.movie_id: r.score for r in Rating.objects.filter(user=other_user)}
             
             # Calculate similarity score
             common_movies = set(user_movie_ratings.keys()) & set(other_ratings.keys())
@@ -224,15 +224,15 @@ class RecommendationEngine:
             
             # Genre preferences
             for genre in movie.genres.all():
-                preferred_genres[genre.id] += rating.rating
+                preferred_genres[genre.id] += rating.score
             
             # Tag preferences
             for tag in movie.tags.all():
-                preferred_tags[tag.id] += rating.rating
+                preferred_tags[tag.id] += rating.score
             
             # Decade preferences
             decade = (movie.release_date.year // 10) * 10
-            preferred_decades[decade] += rating.rating
+            preferred_decades[decade] += rating.score
         
         # Get candidate movies
         rated_movie_ids = Rating.objects.filter(user=user).values_list('movie_id', flat=True)
