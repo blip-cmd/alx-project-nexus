@@ -4,7 +4,6 @@ This directory contains all project documentation, guides, and design files.
 
 ## Files:
 - `API_USAGE_GUIDE.md` - Complete API endpoint documentation with examples
-- `PERFORMANCE_GUIDE.md` - Performance optimization strategies and monitoring
 - `SETUP_GUIDE.md` - Detailed installation and configuration instructions
 - `TESTING_GUIDE.md` - Testing procedures and guidelines
 - `SUPERUSER_GUIDE.md` - Admin user management guide
