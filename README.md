@@ -1,6 +1,56 @@
-# 🎬 ALX Project Nexus Documentation
-
 # 🎬 Movie Recommendation App – ALX Project Nexus
+
+## 🚀 Quick Start
+
+### 🌐 **Live Demo**
+- **API Base URL**: https://movie-recommendation-api-0thd.onrender.com/
+- **API Documentation**: https://movie-recommendation-api-0thd.onrender.com/swagger/
+- **Admin Panel**: https://movie-recommendation-api-0thd.onrender.com/admin/
+
+### ⚡ **Local Development Setup**
+
+#### **Prerequisites**
+- Python 3.11+ installed
+- Git installed
+- Virtual environment support
+
+#### **Simple Setup**
+```bash
+# Clone the repository
+git clone https://github.com/blip-cmd/alx-project-nexus.git
+cd alx-project-nexus
+
+# Create and activate virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+# Windows Command Prompt
+venv\Scripts\activate.bat
+# Linux/Mac
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup database
+python manage.py migrate
+
+# Create superuser (optional)
+python manage.py createsuperuser
+
+# Run development server
+python manage.py runserver
+```
+
+#### **🌐 Access Your Local Server**
+- **API Base**: http://127.0.0.1:8000/
+- **Admin Panel**: http://127.0.0.1:8000/admin/
+- **API Docs**: http://127.0.0.1:8000/swagger/
+- **ReDoc**: http://127.0.0.1:8000/redoc/
+
+---
 
 ## 📌 Project Objective
 To build a scalable, secure, and feature-rich backend application that delivers personalized movie recommendations based on user preferences, ratings, and viewing history. This project demonstrates mastery of backend engineering principles and serves as a portfolio-grade showcase for professional opportunities.
@@ -59,6 +109,61 @@ To build a scalable, secure, and feature-rich backend application that delivers 
 | **Swagger / Postman** | API documentation and testing                                           |
 | **Railway / Render**  | Cloud hosting for deployment and public access                          |
 | **GitHub Actions**    | CI/CD pipeline for automated testing and deployment                     |
+
+---
+
+## 📂 Project Structure
+
+```
+alx-project-nexus/
+├── 📁 authentication/           # User authentication & management
+│   ├── models.py                # User models and authentication logic
+│   ├── serializers.py           # User data serialization
+│   ├── views.py                 # Authentication endpoints
+│   └── urls.py                  # Authentication URL patterns
+├── 📁 movies/                   # Movie catalog & management
+│   ├── models.py                # Movie, Genre, Tag models
+│   ├── serializers.py           # Movie data serialization
+│   ├── views.py                 # Movie CRUD operations
+│   └── urls.py                  # Movie API endpoints
+├── 📁 ratings/                  # User ratings system
+│   ├── models.py                # Rating and review models
+│   ├── serializers.py           # Rating data serialization
+│   └── views.py                 # Rating management endpoints
+├── 📁 recommendations/          # Recommendation engine
+│   ├── models.py                # Recommendation models
+│   ├── views.py                 # Recommendation algorithms
+│   └── urls.py                  # Recommendation endpoints
+├── 📁 movie_recommendation_project/ # Django project settings
+│   ├── settings.py              # Django configuration
+│   ├── urls.py                  # Main URL configuration
+│   └── wsgi.py                  # WSGI application entry point
+├── 📁 static/                   # Static files (CSS, JS, images)
+├── 📁 templates/                # HTML templates
+├── 📁 scripts/                  # Setup & build scripts
+│   ├── build.sh                 # Production build script
+│   ├── setup.ps1                # Windows development setup
+│   └── setup.py                 # Python setup configuration
+├── 📁 tests/                    # Testing suite
+│   ├── api_test_suite.py        # Comprehensive API tests
+│   ├── run_tests.py             # Test runner script
+│   ├── test_auth_live.py        # Authentication testing
+│   ├── test_db_connection.py    # Database connectivity tests
+│   └── test_deployment.py       # Deployment verification tests
+├── 📁 docs/                     # Documentation & design files
+│   ├── API_USAGE_GUIDE.md       # Complete API usage documentation
+│   ├── PERFORMANCE_GUIDE.md     # Performance optimization guide
+│   ├── SETUP_GUIDE.md           # Detailed setup instructions
+│   ├── ERD.png                  # Database design diagram
+│   ├── ERD.txt                  # Database schema documentation
+│   └── TODO.md                  # Development roadmap
+├── 📁 deployment/               # Deployment configurations
+│   └── runtime.txt              # Python runtime specification
+├── manage.py                    # Django management script
+├── requirements.txt             # Python dependencies
+├── .env.example                 # Environment variables template
+└── README.md                    # Project documentation (this file)
+```
 
 ---
 
@@ -143,19 +248,33 @@ To get a local copy up and running, follow these steps (to be updated as the pro
    ```
 4. Set up the database and environment variables as needed (instructions will follow).
 
-## Build
+---
 
-The build process and instructions will be documented here as the project is developed. Ready to scaffold the Django project structure!
+## 📚 Documentation & Guides
 
-## Usage
+This project includes comprehensive documentation to help you get started and understand the system:
 
-Once the initial build is complete, instructions for running and using the application will be provided here.## Contributing
+### **🚀 Setup & Development**
+- **[Complete Setup Guide](docs/SETUP_GUIDE.md)** - Detailed installation and configuration instructions
+- **[Performance Guide](docs/PERFORMANCE_GUIDE.md)** - Optimization strategies and monitoring
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+### **🌐 API Documentation**
+- **[API Usage Guide](docs/API_USAGE_GUIDE.md)** - Complete API endpoint documentation with examples
+- **[Interactive API Docs](https://movie-recommendation-api-0thd.onrender.com/swagger/)** - Swagger UI for testing
+- **[ReDoc Documentation](https://movie-recommendation-api-0thd.onrender.com/redoc/)** - Alternative API documentation format
 
-## License
+### **📊 Database & Architecture**
+- **[Entity Relationship Diagram](docs/ERD.png)** - Visual database schema
+- **[Database Schema](docs/ERD.txt)** - Text-based schema documentation
+- **[Development Roadmap](docs/TODO.md)** - Project tasks and progress tracking
 
-This project is licensed under the MIT License.
+### **🧪 Testing**
+- **[Testing Guide](docs/TESTING_GUIDE.md)** - How to run and write tests
+- **Automated Test Suite** - Located in `tests/` directory
+
+---
+
+## ✅ Development Challenges & Solutions
 
 - **Challenge**: Designing a flexible schema for user preferences and ratings  
 	**Solution**: Created normalized models with many-to-many relationships and indexed queries for performance.
@@ -182,39 +301,16 @@ This project is licensed under the MIT License.
 
 ---
 
-## 📌 Repository Structure
+## 🤝 Contributing
 
-```
-alx-project-nexus/
-├── 📁 authentication/           # User authentication & management
-├── 📁 movies/                   # Movie catalog & management  
-├── 📁 ratings/                  # User ratings system
-├── 📁 recommendations/          # Recommendation engine
-├── 📁 movie_recommendation_project/ # Django project settings
-├── 📁 static/                   # Static files
-├── 📁 templates/                # HTML templates
-├── 📁 scripts/                  # Setup & build scripts
-│   ├── build.sh                 # Production build script
-│   ├── setup.ps1                # Windows development setup
-│   └── setup.py                 # Python setup configuration
-├── 📁 tests/                    # Testing suite
-│   ├── api_test_suite.py        # Main API tests
-│   ├── run_tests.py             # Test runner
-│   └── test_*.py                # Various test scripts
-├── 📁 docs/                     # Documentation & design
-│   ├── ERD.png                  # Database design diagram
-│   ├── ERD.txt                  # Database schema text
-│   └── TODO.md                  # Development roadmap
-├── 📁 deployment/               # Deployment configurations
-│   └── runtime.txt              # Python runtime specification
-├── manage.py                    # Django management script
-├── requirements.txt             # Python dependencies
-├── .env.example                 # Environment variables template
-└── README.md                    # Project documentation
-``` 
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
 ## 🚀 Final Thoughts
 
-Project Nexus will be a transformative experience. It challenges me to apply backend engineering principles in a real-world context, collaborate across teams, and deliver a professional-grade application. This repository stands as a testament to my growth and readiness for backend engineering roles in the global tech landscape
+Project Nexus will be a transformative experience. It challenges me to apply backend engineering principles in a real-world context, collaborate across teams, and deliver a professional-grade application. This repository stands as a testament to my growth and readiness for backend engineering roles in the global tech landscape.
