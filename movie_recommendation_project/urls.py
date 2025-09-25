@@ -53,7 +53,7 @@ schema_view = get_schema_view(
         List endpoints support pagination with `page` and `page_size` parameters.
         """,
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@movierecommendations.local"),
+        contact=openapi.Contact(email="ryanniiakweibrown1@gmail.com"),
         license=openapi.License(name="MIT License"),
     ),
     public=True,
