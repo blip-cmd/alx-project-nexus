@@ -3,6 +3,7 @@ URL configuration for movies app.
 """
 from django.urls import path
 from . import views
+from . import seed_api
 
 app_name = 'movies'
 
@@ -37,4 +38,8 @@ urlpatterns = [
     path('tags/<int:pk>/update/', views.TagUpdateView.as_view(), name='tag-update'),
     path('tags/<int:pk>/delete/', views.TagDeleteView.as_view(), name='tag-delete'),
     path('tags/<int:tag_id>/movies/', views.TagMoviesView.as_view(), name='tag-movies'),
+    
+    # Admin data seeding endpoints (for production)
+    path('admin/seed-data/', seed_api.seed_database, name='admin-seed-data'),
+    path('admin/database-stats/', seed_api.database_stats, name='admin-db-stats'),
 ]
