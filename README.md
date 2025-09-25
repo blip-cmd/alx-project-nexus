@@ -6,6 +6,8 @@
 - **API Base URL**: https://movie-recommendation-api-0thd.onrender.com/
 - **API Documentation**: https://movie-recommendation-api-0thd.onrender.com/swagger/
 - **Admin Panel**: https://movie-recommendation-api-0thd.onrender.com/admin/
+- **📊 Project Presentation Slides**: https://gamma.app/docs/Movie-Recommendation-API-dn7fg6o9xgloikb
+- **📊 Project Demo**: https://youtube.com/demovideoincoming
 
 ### ⚡ **Local Development Setup**
 
