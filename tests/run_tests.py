@@ -14,9 +14,13 @@ def run_tests():
     print("=" * 50)
     
     # Check if we're in the right directory
-    if not os.path.exists("manage.py"):
-        print("❌ Error: manage.py not found. Please run this from the project root directory.")
+    if not os.path.exists("../manage.py"):
+        print("❌ Error: manage.py not found. Please run this from the tests directory or project root.")
         return False
+    
+    # Add project root to Python path for imports
+    project_root = os.path.abspath('..' if not os.path.exists("manage.py") else '.')
+    sys.path.insert(0, project_root)
     
     # Check if virtual environment is activated
     if not hasattr(sys, 'real_prefix') and not (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):

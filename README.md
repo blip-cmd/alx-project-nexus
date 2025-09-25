@@ -184,8 +184,34 @@ This project is licensed under the MIT License.
 
 ## 📌 Repository Structure
 
+```
 alx-project-nexus/
-├── README.md 
+├── 📁 authentication/           # User authentication & management
+├── 📁 movies/                   # Movie catalog & management  
+├── 📁 ratings/                  # User ratings system
+├── 📁 recommendations/          # Recommendation engine
+├── 📁 movie_recommendation_project/ # Django project settings
+├── 📁 static/                   # Static files
+├── 📁 templates/                # HTML templates
+├── 📁 scripts/                  # Setup & build scripts
+│   ├── build.sh                 # Production build script
+│   ├── setup.ps1                # Windows development setup
+│   └── setup.py                 # Python setup configuration
+├── 📁 tests/                    # Testing suite
+│   ├── api_test_suite.py        # Main API tests
+│   ├── run_tests.py             # Test runner
+│   └── test_*.py                # Various test scripts
+├── 📁 docs/                     # Documentation & design
+│   ├── ERD.png                  # Database design diagram
+│   ├── ERD.txt                  # Database schema text
+│   └── TODO.md                  # Development roadmap
+├── 📁 deployment/               # Deployment configurations
+│   └── runtime.txt              # Python runtime specification
+├── manage.py                    # Django management script
+├── requirements.txt             # Python dependencies
+├── .env.example                 # Environment variables template
+└── README.md                    # Project documentation
+``` 
 
 ---
 

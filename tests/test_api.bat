@@ -4,16 +4,16 @@ echo 🎬 Movie Recommendation API Test Suite
 echo =====================================
 
 REM Check if virtual environment exists
-if not exist "venv\" (
+if not exist "..\venv\" (
     echo ❌ Virtual environment not found!
-    echo 💡 Create it with: python -m venv venv
+    echo 💡 Create it with: python -m venv venv (from project root)
     pause
     exit /b 1
 )
 
 REM Activate virtual environment
 echo 🔄 Activating virtual environment...
-call venv\Scripts\activate.bat
+call ..\venv\Scripts\activate.bat
 
 REM Check if Django server is running
 echo 🔍 Checking if Django server is running...
