@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ project_name }}</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -37,22 +39,54 @@
             border-radius: 15px;
             backdrop-filter: blur(10px);
             margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
         .api-link {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
             background: rgba(255,255,255,0.2);
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 25px;
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
         .api-link:hover {
             background: rgba(255,255,255,0.3);
             border-color: rgba(255,255,255,0.5);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .github-section {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: #24292e;
+            border: 2px solid #444;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .github-link:hover {
+            background: #2f363d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .version {
             font-size: 0.9rem;
@@ -60,34 +94,117 @@
             margin-top: 2rem;
         }
         .emoji {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin: 0 0.5rem;
+        }
+        .features {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎬 {{ project_name }}</h1>
+        <h1><i class="fas fa-film"></i> {{ project_name }}</h1>
         <p class="subtitle">Your AI-Powered Movie Discovery Platform</p>
         
         <div class="api-links">
-            <h3>🚀 API Endpoints</h3>
-            <a href="{{ api_root }}" class="api-link">API Root</a>
-            <a href="/api/auth/status/" class="api-link">🔐 Authentication</a>
-            <a href="/api/movies/status/" class="api-link">🎭 Movies</a>
-            <a href="/api/recommendations/status/" class="api-link">🧠 Recommendations</a>
-            <a href="/api/ratings/status/" class="api-link">⭐ Ratings</a>
-            <a href="/admin/" class="api-link">⚙️ Admin</a>
+            <h3><i class="fas fa-rocket"></i> API Endpoints</h3>
+            <a href="{{ api_root }}" class="api-link">
+                <i class="fas fa-home"></i> API Root
+            </a>
+            <a href="/api/auth/status/" class="api-link">
+                <i class="fas fa-lock"></i> Authentication
+            </a>
+            <a href="/api/movies/status/" class="api-link">
+                <i class="fas fa-video"></i> Movies
+            </a>
+            <a href="/api/recommendations/status/" class="api-link">
+                <i class="fas fa-brain"></i> Recommendations
+            </a>
+            <a href="/api/ratings/status/" class="api-link">
+                <i class="fas fa-star"></i> Ratings
+            </a>
+            <a href="/admin/" class="api-link">
+                <i class="fas fa-cogs"></i> Admin Panel
+            </a>
+        </div>
+
+        <div class="api-links">
+            <h3><i class="fas fa-book"></i> API Documentation</h3>
+            <a href="/swagger/" class="api-link">
+                <i class="fas fa-file-code"></i> Swagger UI
+            </a>
+            <a href="/redoc/" class="api-link">
+                <i class="fas fa-book-open"></i> ReDoc
+            </a>
+            <a href="/docs/" class="api-link">
+                <i class="fas fa-documentation"></i> API Docs
+            </a>
+            <a href="/health/" class="api-link">
+                <i class="fas fa-heartbeat"></i> Health Check
+            </a>
+        </div>
+
+        <div class="github-section">
+            <h3><i class="fab fa-github"></i> Source Code</h3>
+            <a href="https://github.com/blip-cmd/alx-project-nexus" class="github-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
         </div>
         
         <div class="features">
-            <h3>🌟 Features</h3>
-            <p>
-                <span class="emoji">🎥</span> Comprehensive Movie Database
-                <span class="emoji">🤖</span> AI-Powered Recommendations
-                <span class="emoji">👥</span> User Reviews & Ratings
-                <span class="emoji">📱</span> RESTful API
-            </p>
+            <h3><i class="fas fa-star"></i> Features</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Comprehensive Movie Database</h4>
+                    <p>Extensive collection of movies with detailed information</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI-Powered Recommendations</h4>
+                    <p>Advanced algorithms for personalized movie suggestions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>User Reviews & Ratings</h4>
+                    <p>Community-driven ratings and review system</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>RESTful API</h4>
+                    <p>Modern, scalable API built with Django REST Framework</p>
+                </div>
+            </div>
         </div>
         
         <p class="version">Version {{ version }} | Built with Django REST Framework</p>
