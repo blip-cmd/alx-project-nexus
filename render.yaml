@@ -3,7 +3,7 @@ services:
     name: movie-recommendation-api
     env: python
     plan: free
-    buildCommand: "./build.sh"
+    buildCommand: "./scripts/build.sh"
     startCommand: "gunicorn movie_recommendation_project.wsgi:application"
     envVars:
       - key: PYTHON_VERSION

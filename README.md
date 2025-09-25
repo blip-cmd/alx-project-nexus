@@ -157,10 +157,9 @@ alx-project-nexus/
 │   ├── ERD.png                  # Database design diagram
 │   ├── ERD.txt                  # Database schema documentation
 │   └── TODO.md                  # Development roadmap
-├── 📁 deployment/               # Deployment configurations
-│   └── runtime.txt              # Python runtime specification
 ├── manage.py                    # Django management script
 ├── requirements.txt             # Python dependencies
+├── render.yaml                  # Render deployment configuration
 ├── .env.example                 # Environment variables template
 └── README.md                    # Project documentation (this file)
 ```
