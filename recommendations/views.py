@@ -413,9 +413,9 @@ class TrendingMoviesView(APIView):
             
             # Get trending movies
             trending_movies = Movie.objects.annotate(
-                recent_ratings=Count('ratings', filter=Q(ratings__created_at__gte=threshold)),
+                recent_ratings=Count('ratings', filter=Q(ratings__rated_at__gte=threshold)),
                 recent_favorites=Count('favorited_by', filter=Q(favorited_by__favorited_at__gte=threshold)),
-                recent_watches=Count('watch_history', filter=Q(watch_history__watched_at__gte=threshold)),
+                recent_watches=Count('watched_by', filter=Q(watched_by__watched_at__gte=threshold)),
                 trend_score=F('recent_ratings') + F('recent_favorites') * 2 + F('recent_watches')
             ).filter(
                 trend_score__gt=0

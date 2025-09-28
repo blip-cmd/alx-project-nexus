@@ -1,5 +1,13 @@
 """
-URL configuration for ratings app.
+URL configura    # Movie-specific rating endpoints
+    path('movies/<uuid:movie_id>/rate/', views.RateMovieView.as_view(), name='rate-movie'),
+    path('movies/<uuid:movie_id>/favorite/', views.ToggleFavoriteView.as_view(), name='toggle-favorite'),
+    path('movies/<uuid:movie_id>/watch/', views.AddToWatchHistoryView.as_view(), name='add-to-watchlist'),
+    path('movies/<uuid:movie_id>/unwatch/', views.RemoveFromWatchHistoryView.as_view(), name='remove-from-watchlist'),
+    
+    # Movie rating analytics
+    path('movies/<uuid:movie_id>/ratings/', views.MovieRatingsView.as_view(), name='movie-ratings'),
+    path('movies/<uuid:movie_id>/stats/', views.MovieRatingStatsView.as_view(), name='movie-rating-stats'),ratings app.
 """
 from django.urls import path
 from . import views

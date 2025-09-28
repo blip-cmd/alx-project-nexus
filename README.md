@@ -68,7 +68,7 @@ To build a scalable, secure, and feature-rich backend application that delivers 
   Browse, search, and filter movies by genre, popularity, and release date.
 
 - **⭐ User Ratings & Favorites**  
-  Users can rate movies and mark favorites to personalize their experience.
+  Users can rate movies (0.5-5.0 stars) and mark favorites to personalize their experience.
 
 - **🧠 Recommendation Engine**  
   Suggests movies based on user interactions—starting with genre/popularity-based logic and extendable to collaborative filtering.
@@ -156,6 +156,8 @@ alx-project-nexus/
 │   ├── API_USAGE_GUIDE.md       # Complete API usage documentation
 │   ├── PERFORMANCE_GUIDE.md     # Performance optimization guide
 │   ├── SETUP_GUIDE.md           # Detailed setup instructions
+│   ├── TESTING_GUIDE.md         # Testing documentation
+│   ├── SUPERUSER_GUIDE.md       # Admin user management guide
 │   ├── ERD.png                  # Database design diagram
 │   ├── ERD.txt                  # Database schema documentation
 │   └── TODO.md                  # Development roadmap

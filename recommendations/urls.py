@@ -20,5 +20,5 @@ urlpatterns = [
     path('trending/', views.TrendingMoviesView.as_view(), name='trending-movies'),
     
     # Similar movies
-    path('movies/<int:movie_id>/similar/', views.SimilarMoviesView.as_view(), name='similar-movies'),
+    path('movies/<uuid:movie_id>/similar/', views.SimilarMoviesView.as_view(), name='similar-movies'),
 ]

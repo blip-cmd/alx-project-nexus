@@ -18,41 +18,42 @@
 
 ### **🔐 Authentication**
 ```http
-POST /api/auth/register/     # User registration
-POST /api/auth/login/        # User login  
-POST /api/auth/refresh/      # Refresh JWT token
-POST /api/auth/logout/       # User logout
+POST /api/auth/register/        # User registration
+POST /api/auth/login/           # User login  
+POST /api/auth/token/refresh/   # Refresh JWT token
+POST /api/auth/logout/          # User logout
 ```
 
 ### **🎬 Movies**
 ```http
-GET    /api/movies/          # List all movies (paginated)
-GET    /api/movies/{id}/     # Get specific movie details
-GET    /api/movies/popular/  # Get popular movies
-GET    /api/movies/trending/ # Get trending movies
-GET    /api/movies/search/   # Search movies by title/genre
+GET    /api/movies/           # List all movies (paginated, with search via ?search=query)
+GET    /api/movies/{uuid}/    # Get specific movie details
+GET    /api/movies/popular/   # Get popular movies
+GET    /api/movies/trending/  # Get trending movies
+# Note: Search is built into /api/movies/ via ?search=query parameter
 ```
 
 ### **⭐ Ratings**
 ```http
-GET    /api/ratings/         # User's ratings
-POST   /api/ratings/         # Rate a movie
-PUT    /api/ratings/{id}/    # Update rating
-DELETE /api/ratings/{id}/    # Remove rating
+GET    /api/ratings/my-ratings/     # User's ratings
+POST   /api/ratings/movies/{uuid}/rate/  # Rate a movie
+PUT    /api/ratings/movies/{uuid}/rate/  # Update rating  
+DELETE /api/ratings/movies/{uuid}/rate/  # Remove rating
 ```
 
 ### **💡 Recommendations**
 ```http
-GET    /api/recommendations/ # Get personalized recommendations
-GET    /api/recommendations/similar/{movie_id}/ # Similar movies
+GET    /api/recommendations/for-me/  # Get personalized recommendations
+GET    /api/recommendations/movies/{movie_id}/similar/ # Similar movies
+GET    /api/recommendations/trending/  # Trending movies
 ```
 
 ### **👤 User Profile**
 ```http
-GET    /api/profile/         # Get user profile
-PUT    /api/profile/         # Update profile
-GET    /api/profile/favorites/ # User's favorite movies
-POST   /api/profile/favorites/ # Add to favorites
+GET    /api/auth/profile/           # Get user profile
+PUT    /api/auth/profile/           # Update profile  
+GET    /api/ratings/my-favorites/   # User's favorite movies
+POST   /api/ratings/movies/{uuid}/favorite/ # Toggle favorites
 ```
 
 ---
@@ -138,14 +139,14 @@ curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?page
 
 ### **Search Movies**
 ```bash
-# Search by title
-curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/search/?q=shawshank"
+# Search by title or description
+curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?search=shawshank"
 
-# Filter by genre
-curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?genre=drama"
+# Filter by genre  
+curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?genres__name=drama"
 
-# Filter by year
-curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?release_year=1994"
+# Filter by release year
+curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/?release_date__year=1994"
 ```
 
 ### **Get Movie Details**
@@ -180,23 +181,22 @@ curl -X GET "https://movie-recommendation-api-0thd.onrender.com/api/movies/1/"
 ### **Rate a Movie**
 ```bash
 # Request (Authentication required)
-curl -X POST https://movie-recommendation-api-0thd.onrender.com/api/ratings/ \
+curl -X POST https://movie-recommendation-api-0thd.onrender.com/api/ratings/movies/1/rate/ \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -d '{
-    "movie": 1,
-    "rating": 5,
+    "score": 5.0,
     "review": "Absolutely fantastic movie!"
   }'
 
 # Response
 {
-  "id": 15,
+  "id": "550e8400-e29b-41d4-a716-446655440000",
   "user": 1,
   "movie": 1,
-  "rating": 5,
+  "score": 5.0,
   "review": "Absolutely fantastic movie!",
-  "created_at": "2025-09-25T14:30:00Z"
+  "rated_at": "2025-09-25T14:30:00Z"
 }
 ```
 
