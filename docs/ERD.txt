@@ -1,10 +1,12 @@
 @startuml
 entity User {
-  *id : UUID
+  *id : integer (Django default)
   --
-  name : string
+  username : string
   email : string
-  password_hash : string
+  password : string (hashed)
+  first_name : string
+  last_name : string
   created_at : datetime
   last_login : datetime
 }
@@ -15,13 +17,21 @@ entity Movie {
   title : string
   description : text
   release_date : date
+  duration : integer
+  poster_image : URL
+  trailer_url : URL
+  imdb_rating : decimal(3,1)
+  popularity_score : decimal(10,2)
   created_at : datetime
+  updated_at : datetime
 }
 
 entity Genre {
   *id : UUID
   --
   name : string
+  description : text
+  created_at : datetime
 }
 
 entity MovieGenre {
@@ -30,29 +40,39 @@ entity MovieGenre {
 }
 
 entity Rating {
-  *user_id : UUID
-  *movie_id : UUID
+  *id : UUID
+  *user_id : integer (FK to User)
+  *movie_id : UUID (FK to Movie)
   --
-  score : decimal
+  score : decimal(2,1) [0.5-5.0]
+  review : text
   rated_at : datetime
+  updated_at : datetime
 }
 
 entity WatchHistory {
-  *user_id : UUID
-  *movie_id : UUID
-  *watched_at : datetime
+  *id : UUID
+  *user : integer (FK to User)
+  *movie : UUID (FK to Movie)
+  --
+  watched_at : datetime
+  watch_duration : integer
+  completed : boolean
 }
 
 entity Favorite {
-  *user_id : UUID
-  *movie_id : UUID
-  *favorited_at : datetime
+  *id : UUID
+  *user : integer (FK to User)
+  *movie : UUID (FK to Movie)
+  --
+  favorited_at : datetime
 }
 
 entity Tag {
   *id : UUID
   --
   name : string
+  created_at : datetime
 }
 
 entity MovieTag {
